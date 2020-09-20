@@ -499,4 +499,5 @@ void *VideoDecoder::getCustomFileBufferFuncData() const
 void VideoDecoder::resetBuffer()
 {
     videoCurrentBufferIndex = 0;
+    videoOutputEnded = false;
 }
