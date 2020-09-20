@@ -273,9 +273,9 @@ public class VideoDecoder implements Disposable {
 		return pointer->isBuffered();
 													 */
 
-	/** @return Resets the buffer to begin. */
-	public native boolean resetBuffer ();/*
+	/** Resets the buffer to begin. */
+	public native void resetBuffer ();/*
 		VideoDecoder* pointer = getClassPointer<VideoDecoder>(env, object);
-		return pointer->resetBuffer();
+		pointer->resetBuffer();
 													 */
 }
