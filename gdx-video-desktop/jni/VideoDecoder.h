@@ -129,6 +129,8 @@ private:
      * this to load the shared info.
      */
     void loadContainer(VideoBufferInfo* bufferInfo);
+
+    void resetBuffer();
 private:
     AVFormatContext* formatContext;
     AVCodecContext* videoCodecContext;
