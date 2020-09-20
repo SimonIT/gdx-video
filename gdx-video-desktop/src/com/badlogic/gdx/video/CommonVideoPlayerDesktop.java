@@ -54,6 +54,7 @@ abstract public class CommonVideoPlayerDesktop implements VideoPlayer {
 	FileHandle currentFile;
 
 	boolean playing = false;
+	boolean loop = false;
 
 	public CommonVideoPlayerDesktop () {
 	}
@@ -146,17 +147,25 @@ abstract public class CommonVideoPlayerDesktop implements VideoPlayer {
 			boolean newFrame = false;
 			if (!showAlreadyDecodedFrame) {
 				ByteBuffer videoData = decoder.nextVideoFrame();
+
+				if (videoData == null) {
+					if (loop) {
+						decoder.resetBuffer();
+						videoData = decoder.nextVideoFrame();
+					} else {
+						playing = false;
+						if (completionListener != null) {
+							completionListener.onCompletionListener(currentFile);
+						}
+					}
+				}
+
 				if (videoData != null) {
 					if (texture == null) texture = new Texture(currentVideoWidth, currentVideoHeight, Format.RGB888);
 					texture.bind();
 					Gdx.gl.glTexImage2D(GL20.GL_TEXTURE_2D, 0, GL20.GL_RGB, currentVideoWidth, currentVideoHeight, 0, GL20.GL_RGB,
 						GL20.GL_UNSIGNED_BYTE, videoData);
 					newFrame = true;
-				} else {
-					playing = false;
-					if (completionListener != null) {
-						completionListener.onCompletionListener(currentFile);
-					}
 				}
 			}
 
@@ -284,12 +293,12 @@ abstract public class CommonVideoPlayerDesktop implements VideoPlayer {
 
 	@Override
 	public void setLooping (boolean looping) {
-		// TODO
+		this.loop = looping;
 	}
 
 	@Override
 	public boolean isLooping () {
-		return false;
+		return loop;
 	}
 
 	@Override

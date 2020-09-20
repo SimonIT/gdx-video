@@ -16,9 +16,9 @@
 
 package com.badlogic.gdx.video;
 
-import java.nio.ByteBuffer;
-
 import com.badlogic.gdx.utils.Disposable;
+
+import java.nio.ByteBuffer;
 
 /** This class is a java wrapper used on the background, which communicates through jni to the actual video decoder.
  *
@@ -271,5 +271,11 @@ public class VideoDecoder implements Disposable {
 	public native boolean isBuffered ();/*
 		VideoDecoder* pointer = getClassPointer<VideoDecoder>(env, object);
 		return pointer->isBuffered();
+													 */
+
+	/** @return Resets the buffer to begin. */
+	public native boolean resetBuffer ();/*
+		VideoDecoder* pointer = getClassPointer<VideoDecoder>(env, object);
+		return pointer->resetBuffer();
 													 */
 }
