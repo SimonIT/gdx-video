@@ -114,6 +114,8 @@ public:
     bool isBuffered();
     void *getCustomFileBufferFuncData() const;
     FillFileBufferFunc getFillFileBufferFunc() const;
+
+    void resetBuffer();
 private:
     int decodeAudio(void* audioBuffer);
 
@@ -129,8 +131,6 @@ private:
      * this to load the shared info.
      */
     void loadContainer(VideoBufferInfo* bufferInfo);
-
-    void resetBuffer();
 private:
     AVFormatContext* formatContext;
     AVCodecContext* videoCodecContext;
