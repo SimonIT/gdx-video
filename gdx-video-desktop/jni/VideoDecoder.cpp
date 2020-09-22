@@ -500,4 +500,5 @@ void VideoDecoder::resetBuffer()
 {
     videoCurrentBufferIndex = 0;
     videoOutputEnded = false;
+    this->start();
 }
